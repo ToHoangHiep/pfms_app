@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/api_client.dart';
+import '../../../data/api/api_base.dart';
+import '../../../data/api/transactions_api.dart';
+
 import '../../../data/models/transaction.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 class TransactionsPage extends StatefulWidget {
@@ -22,7 +24,7 @@ String formatMoney(int v) {
 
 
 class _TransactionsPageState extends State<TransactionsPage> {
-  final api = ApiClient();
+  final txApi = TransactionsApi(ApiBase());
 
   final TextEditingController _searchCtrl = TextEditingController();
 
@@ -53,7 +55,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     });
 
     try {
-      final data = await api.listTransactions();
+      final data = await txApi.listTransactions();
       setState(() {
         items = data;
       });
@@ -145,7 +147,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     if (ok != true) return;
 
     try {
-      await api.deleteTransaction(id);
+      await txApi.deleteTransaction(id);
       await _load();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -349,7 +351,7 @@ class _TransactionDialog extends StatefulWidget {
 }
 
 class _TransactionDialogState extends State<_TransactionDialog> {
-  final api = ApiClient();
+  final txApi = TransactionsApi(ApiBase());
 
   late String type;
   final amountCtrl = TextEditingController();
@@ -401,15 +403,16 @@ class _TransactionDialogState extends State<_TransactionDialog> {
 
     try {
       if (widget.existing == null) {
-        await api.createTransaction(
+        await txApi.createTransaction(
           type: type,
           amount: amount,
           category: category,
           note: note,
           occurredAt: occurredAt,
         );
+
       } else {
-        await api.updateTransaction(
+        await txApi.updateTransaction(
           widget.existing!.id,
           type: type,
           amount: amount,
@@ -417,6 +420,7 @@ class _TransactionDialogState extends State<_TransactionDialog> {
           note: note,
           occurredAt: occurredAt,
         );
+
       }
 
       if (!mounted) return;
