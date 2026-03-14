@@ -1,17 +1,21 @@
-# pfms_app
+# PFMS App (Flutter + Spring Boot + Firebase)
 
-A new Flutter project.
+PFMS = Personal Finance Management System  
+- Frontend: Flutter (Web / Android)
+- Backend: Spring Boot (Java 17) + Firebase Admin SDK + Firestore
+- Auth: Firebase Authentication (Anonymous)
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 1) Yêu cầu môi trường
 
-A few resources to get you started if this is your first Flutter project:
+### Frontend (Flutter)
+- Flutter SDK (khuyến nghị bản stable mới)
+- Dart đi kèm Flutter
+- Chạy Web: Chrome
+- Chạy Android: Android Studio + Android SDK + Emulator
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Kiểm tra:
+```bash
+flutter --version
+flutter doctor

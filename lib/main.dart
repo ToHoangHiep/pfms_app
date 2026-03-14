@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'features/dashboard/ui/dashboard_page.dart';
 import 'firebase_options.dart';
 import 'features/transactions/ui/transactions_page.dart';
 
@@ -35,8 +35,7 @@ class MyApp extends StatelessWidget {
           if (user == null) {
             return const AuthTestPage();
           }
-
-          return const TransactionsPage();
+          return const DashboardPage();
         },
       ),
     );
